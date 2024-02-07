@@ -16,7 +16,6 @@ const ChatComponent = () => {
 
     socket.on("chat_message", (data) => {
       setMensajes((mensajes) => [...mensajes, data]);
-      console.log();
     });
 
     return () => {
@@ -30,20 +29,7 @@ const ChatComponent = () => {
       usuario: socket.id,
       mensaje: nuevoMensaje,
     });
-    const input = document.getElementById("inputChat");
-    input.value = "";
   };
-
-  const GoRoom = () => {
-    const inpuntGR = document.getElementById("goRoom");
-    console.log("INPUT GOOO ROOMS", inpuntGR.value);
-    if (inpuntGR.value === "geoguessr") {
-      window.location.assign("/GameRoom");
-    } else {
-      alert("No existe la sala a la que quieres entrar");
-    }
-  };
-
   return (
     <div>
       <h2>{isConnected ? "CONECTADO" : "NO CONECTADO"}</h2>
@@ -54,16 +40,8 @@ const ChatComponent = () => {
           </li>
         ))}
       </ul>
-      <input
-        id="inputChat"
-        type="text"
-        onChange={(e) => setNuevoMensaje(e.target.value)}
-      />
+      <input type="text" onChange={(e) => setNuevoMensaje(e.target.value)} />
       <button onClick={enviarMensaje}>Enviar</button>
-      <h3>Quieres entrar a una room chat</h3>
-      <h3>Ingresa el codigo de la room </h3>
-      <input id="goRoom" type="text"></input>
-      <button onClick={GoRoom}>Entrar a la room</button>
     </div>
   );
 };
